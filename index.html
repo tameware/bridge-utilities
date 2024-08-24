@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
         <!-- See https://www.npmjs.com/package/tiny-editorgit push -->
-        <div data-tiny-editor id="result" data-formatblock="no" data-bold="no" data-italic="no" data-underline="no" data-fontname="no" data-forecolor="no" data-justifyleft="no" data-justifycenter="no" data-justifyright="no" data-insertorderedlist="no" data-insertunorderedlist="no" data-outdent="no" data-indent="no" data-remove-format="no" data-autofocus="no">
+        <div data-tiny-editor id="result" style="display:none" data-formatblock="no" data-bold="no" data-italic="no" data-underline="no" data-fontname="no" data-forecolor="no" data-justifyleft="no" data-justifycenter="no" data-justifyright="no" data-insertorderedlist="no" data-insertunorderedlist="no" data-outdent="no" data-indent="no" data-remove-format="no" data-autofocus="no">
         </div>
 
 		<blockquote>
@@ -59,6 +59,7 @@
     
                 // Display the result on the page
                 document.getElementById('result').innerText = parse(userInput);
+                document.getElementById('result').style.display = 'block';
             });
         </script>
 
