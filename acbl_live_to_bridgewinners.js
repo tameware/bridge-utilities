@@ -46,10 +46,6 @@ function parseURL(url) {
     .catch(err => console.log(err));
 }
 
-for (let i = 1; i <= 10; i++) {
-    console.log(i, vul(i));
-}
-
 var isNode=new Function("try {return this===global;}catch(e){return false;}");
 
 if (isNode()) {
