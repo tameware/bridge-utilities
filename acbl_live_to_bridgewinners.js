@@ -1,9 +1,12 @@
 #! /usr/bin/env node
 
 function vul(board) {
+    // Defines the vulnerability for boards 1 to 4, per lin format
     const vulPatterns = ["-", "n", "e", "b"];
     
-    // Calculate the pattern index based on the board number
+    // Math.floor((board - 1) / 4) computes the # of full cycles of 4 boards.
+	// (board - 1) % 4 handles the offset within the current cycle.
+	// The sum is taken modulo 4 to get the correct vulnerability for the board.
     const patternIndex = (Math.floor((board - 1) / 4) + ((board - 1) % 4)) % 4;
     
     // Return the corresponding vulnerability
