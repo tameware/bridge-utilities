@@ -1,18 +1,13 @@
 #! /usr/bin/env node
 
 function vul(board) {
-    switch(board) {
-      case 1:
-        return "-";
-      case 2:
-        return "n";
-      case 3:
-        return "e";
-      case 4:
-        return "b";
-      default:
-        return vul(Math.floor((board-1) / 4) + ((board-1) % 4) % 4 + 1);
-    }
+    const vulPatterns = ["-", "n", "e", "b"];
+    
+    // Calculate the pattern index based on the board number
+    const patternIndex = (Math.floor((board - 1) / 4) + ((board - 1) % 4)) % 4;
+    
+    // Return the corresponding vulnerability
+    return vulPatterns[patternIndex];
 }
 
 function parse(source) {
@@ -49,6 +44,10 @@ function parseURL(url) {
         console.log(parse(text));
     })
     .catch(err => console.log(err));
+}
+
+for (let i = 1; i <= 10; i++) {
+    console.log(i, vul(i));
 }
 
 var isNode=new Function("try {return this===global;}catch(e){return false;}");
