@@ -15,22 +15,8 @@ function vul(board) {
     }
 }
 
-function parseX(source) {
-    const regexp = /handviewer.html.(.*?)b=(\d+)(.*?)&tbt=y/gi;
-    const array = [...source.matchAll(regexp)];
-
-    result = "";
-    
-    for (row of array) {
-        lin = row[1] + "b=" + row[2] + row[3];
-        result += `{ghand ${lin}}\n`;
-    }
-    
-    return result;
-}
-
 function parse(source) {
-    const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)(.*?)&tbt=y/gi;
+    const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
     const array = [...source.matchAll(regexp)];
 
     result = "";
@@ -39,9 +25,10 @@ function parse(source) {
         let cards = row[1];
         let vul = row[2];
         let board = row[3];
-        let auction_and_names = row[4];
+        let auction = row[4];
+        let names = row[5];
         
-        lin = `${cards}v=${vul}&b=${board}${auction_and_names}`;
+        lin = `${cards}v=${vul}&b=${board}&a=${auction}${names}`;
         result += `{ghand ${lin}}\n`;
     }
     
