@@ -17,29 +17,25 @@ function vul(board) {
 
 function parse(source) {
     const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
-    const array = [...source.matchAll(regexp)];
+    const matches = [...source.matchAll(regexp)];
 
-    result = "";
-    
-    for (row of array) {
-        const [ignore, cards, vul, board, auction, names] = row;
-        
-        const namesArray = names.split("&");
-        
-        trimmedArray = [];
-        
-        for (row of namesArray) {
-            const [direction, name] = row.split("=");
-            trimmed = `${direction}=${name.trim()}`
-            trimmedArray.push(trimmed);
-        }
+    let result = "";
 
-        namesTrimmed = trimmedArray.join("&");
+    for (const match of matches) {
+        const [_, cards, vul, board, auction, names] = match;
 
-        lin = `${cards}v=${vul}&b=${board}&a=${auction}${namesTrimmed}`;
+        const namesTrimmed = names
+            .split("&")
+            .map((name) => {
+                const [direction, playerName] = name.split("=");
+                return `${direction}=${playerName.trim()}`;
+            })
+            .join("&");
+
+        const lin = `${cards}v=${vul}&b=${board}&a=${auction}${namesTrimmed}`;
         result += `{ghand ${lin}}\n`;
     }
-    
+
     return result;
 }
 
