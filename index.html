@@ -6,36 +6,23 @@
 		</title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8">
 	</head>
-	<body style="background-color: #ffffcc;">
-        <script src="./acbl_live_to_bridgewinners.js"></script>
 
+	<body style="background-color: #ffffcc;">
         <h1 style="text-align: center;">Prepare ACBLScore results for a <a href="https://bridgewinners.com">BridgeWinners</a> article</h1>
 		<blockquote>
 			<hr style="text-align: left;">
 		</blockquote>
     
         <form id="textForm">
-            <label for="userInput">Paste the source code of the ACBL Live page you want to parse. This is the page you see if you click on the "Scores" link for a pair.</label><br>
+            <label for="userInput">Paste the HTML source code of the ACBL Live page you want to parse. This is the page you see if you click on the "Scores" link for a pair.</label><br>
             <input type="textarea" id="userInput" name="userInput" cols="150" rows="10" required><br><br>
             <button type="submit">Submit</button>
         </form>
-    
-        <pre>
-            <div id="result"></div>
-        </pre>
-    
-        <script>
-            // This function will handle the form submission
-            document.getElementById('textForm').addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the form from submitting in the traditional way
-    
-                // Get the input value
-                const userInput = document.getElementById('userInput').value;
-    
-                // Display the result on the page
-                document.getElementById('result').innerText = parse(userInput);
-            });
-        </script>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        <div data-tiny-editor id="result" data-formatblock="no" data-bold="no" data-italic="no" data-underline="no" data-fontname="no" data-forecolor="no" data-justifyleft="no" data-justifycenter="no" data-justifyright="no" data-insertorderedlist="no" data-insertunorderedlist="no" data-outdent="no" data-indent="no" data-remove-format="no" data-autofocus="no">
+        </div>
 
 		<blockquote>
 			<hr style="text-align: left;">
@@ -49,5 +36,21 @@
 				</p>
 			</blockquote>
 		</div>
+
+        <script>
+            // Handle the form submission
+            document.getElementById('textForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting in the traditional way
+    
+                // Get the input value
+                const userInput = document.getElementById('userInput').value;
+    
+                // Display the result on the page
+                document.getElementById('result').innerText = parse(userInput);
+            });
+        </script>
+
+        <script src="./acbl_live_to_bridgewinners.js"></script>
+        <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
 	</body>
 </html>
