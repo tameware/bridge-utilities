@@ -22,9 +22,12 @@ function parse(source) {
     for (const match of matches) {
         const [_, cards, vul, board, auction, names] = match;
         
+        let new_vul = vul;
+
         if (vul == canonical_vul(board)) {
         } else {
-            console.log(board, vul, canonical_vul(board));
+            new_vul = canonical_vul(board);
+            console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${new_vul}`);
         }
 
         const namesTrimmed = names
@@ -35,7 +38,7 @@ function parse(source) {
             })
             .join("&");
 
-        const lin = `${cards}v=${vul}&b=${board}&a=${auction}${namesTrimmed}`;
+        const lin = `${cards}v=${new_vul}&b=${board}&a=${auction}${namesTrimmed}`;
         result += `{ghand ${lin}}\n`;
     }
 
