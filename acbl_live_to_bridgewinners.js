@@ -28,7 +28,19 @@ function parse(source) {
         let auction = row[4];
         let names = row[5];
         
-        lin = `${cards}v=${vul}&b=${board}&a=${auction}${names}`;
+        const namesArray = names.split("&");
+        
+        trimmedArray = [];
+        
+        for (row of namesArray) {
+            const [direction, name] = row.split("=");
+            trimmed = `${direction}=${name.trim()}`
+            trimmedArray.push(trimmed);
+        }
+
+        namesTrimmed = trimmedArray.join("&");
+
+        lin = `${cards}v=${vul}&b=${board}&a=${auction}${namesTrimmed}`;
         result += `{ghand ${lin}}\n`;
     }
     
