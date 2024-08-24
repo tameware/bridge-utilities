@@ -15,7 +15,7 @@ function vul(board) {
     }
 }
 
-function parse(source) {
+function parseX(source) {
     const regexp = /handviewer.html.(.*?)b=(\d+)(.*?)&tbt=y/gi;
     const array = [...source.matchAll(regexp)];
 
@@ -23,6 +23,20 @@ function parse(source) {
     
     for (row of array) {
         lin = row[1] + "b=" + row[2] + row[3];
+        result += `{ghand ${lin}}\n`;
+    }
+    
+    return result;
+}
+
+function parse(source) {
+    const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)(.*?)&tbt=y/gi;
+    const array = [...source.matchAll(regexp)];
+
+    result = "";
+    
+    for (row of array) {
+        lin = row[1] + "v=" + row[2] + "&b=" + row[3] + row[4];
         result += `{ghand ${lin}}\n`;
     }
     
