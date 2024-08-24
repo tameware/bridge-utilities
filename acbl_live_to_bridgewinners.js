@@ -5,8 +5,8 @@ function canonical_vul(board) {
     const vulPatterns = ["-", "n", "e", "b"];
     
     // Math.floor((board - 1) / 4) computes the # of full cycles of 4 boards.
-	// (board - 1) % 4 handles the offset within the current cycle.
-	// The sum is taken modulo 4 to get the correct vulnerability for the board.
+    // (board - 1) % 4 handles the offset within the current cycle.
+    // The sum is taken modulo 4 to get the correct vulnerability for the board.
     const patternIndex = (Math.floor((board - 1) / 4) + ((board - 1) % 4)) % 4;
     
     // Return the corresponding vulnerability
