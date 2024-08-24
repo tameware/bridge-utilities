@@ -22,11 +22,7 @@ function parse(source) {
     result = "";
     
     for (row of array) {
-        let cards = row[1];
-        let vul = row[2];
-        let board = row[3];
-        let auction = row[4];
-        let names = row[5];
+        const [ignore, cards, vul, board, auction, names] = row;
         
         const namesArray = names.split("&");
         
