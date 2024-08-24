@@ -41,7 +41,7 @@ function parse(source) {
         let board = row[3];
         let auction_and_names = row[4];
         
-        lin = cards + "v=" + vul + "&b=" + board + auction_and_names;
+        lin = `${cards}v=${vul}&b=${board}${auction_and_names}`;
         result += `{ghand ${lin}}\n`;
     }
     
