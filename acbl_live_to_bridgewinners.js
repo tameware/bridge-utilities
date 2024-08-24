@@ -39,7 +39,7 @@ function parse(source) {
 
 const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
 
-// Unused due to CORS restrictions
+// Works only from the command line due to CORS restrictions
 function parseURL(url) {
     fetch(url)
     .then(res => res.text())
@@ -51,8 +51,9 @@ function parseURL(url) {
 
 var isNode=new Function("try {return this===global;}catch(e){return false;}");
 
+// If running from the command line rather than in a browser
 if (isNode()) {
-    ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
+    const ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
 
     const fs = require('node:fs');
 
