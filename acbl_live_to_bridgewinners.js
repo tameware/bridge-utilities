@@ -36,7 +36,12 @@ function parse(source) {
     result = "";
     
     for (row of array) {
-        lin = row[1] + "v=" + row[2] + "&b=" + row[3] + row[4];
+        let cards = row[1];
+        let vul = row[2];
+        let board = row[3];
+        let auction_and_names = row[4];
+        
+        lin = cards + "v=" + vul + "&b=" + board + auction_and_names;
         result += `{ghand ${lin}}\n`;
     }
     
