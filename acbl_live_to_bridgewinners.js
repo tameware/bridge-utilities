@@ -64,16 +64,11 @@ const isNode = typeof process !== 'undefined' && process.release && process.rele
 // If running from the command line
 if (isNode) {
     const ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
+    const fs = require('node:fs').promises;
 
-    const fs = require('node:fs');
-
-    fs.readFile(ACBL_LIVE_SAMPLE, 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(parse(data));
-        }
-    });
+    fs.readFile(ACBL_LIVE_SAMPLE, 'utf8')
+        .then(data => console.log(parse(data)))
+        .catch(err => console.error(`Error reading file ${ACBL_LIVE_SAMPLE}:`, err));
 }
 
 
