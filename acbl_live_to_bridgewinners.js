@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-function canonical_vul(board) {
+function canonicalVul(board) {
     // Defines the vulnerability for boards 1 to 4, per lin format
     const vulPatterns = ["-", "n", "e", "b"];
     
@@ -22,12 +22,12 @@ function parse(source) {
     for (const match of matches) {
         const [_, cards, vul, board, auction, names] = match;
         
-        let new_vul = vul;
+        let newVul = vul;
 
-        if (vul == canonical_vul(board)) {
+        if (vul == canonicalVul(board)) {
         } else {
-            new_vul = canonical_vul(board);
-            console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${new_vul}`);
+            newVul = canonicalVul(board);
+            console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${newVul}`);
         }
 
         const namesTrimmed = names
@@ -38,7 +38,7 @@ function parse(source) {
             })
             .join("&");
 
-        const lin = `${cards}v=${new_vul}&b=${board}&a=${auction}${namesTrimmed}`;
+        const lin = `${cards}v=${newVul}&b=${board}&a=${auction}${namesTrimmed}`;
         result += `{ghand ${lin}}\n`;
     }
 
