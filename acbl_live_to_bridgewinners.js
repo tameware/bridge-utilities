@@ -57,10 +57,11 @@ function parseURL(url) {
     .catch(err => console.log(err));
 }
 
-var isNode=new Function("try {return this===global;}catch(e){return false;}");
+// Check whether the code is running in a Node.js environment
+const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
 
-// If running from the command line rather than in a browser
-if (isNode()) {
+// If running from the command line
+if (isNode) {
     const ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
 
     const fs = require('node:fs');
