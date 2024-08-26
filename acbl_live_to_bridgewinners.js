@@ -36,7 +36,9 @@ function parseMatch(match) {
         })
         .join("&");
 
-    return `{ghand ${cards}&v=${correctVul}&b=${board}&a=${auction}&${namesTrimmed}}`;
+    const lin = [cards, `v=${correctVul}`, `b=${board}`, `a=${auction}`, namesTrimmed].join("&")
+
+    return `{ghand ${lin}}`;
 }
 
 /**
