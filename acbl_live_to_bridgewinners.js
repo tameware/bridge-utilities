@@ -36,7 +36,7 @@ function parseMatch(match) {
         })
         .join("&");
 
-    return `{ghand ${cards}v=${correctVul}&b=${board}&a=${auction}${namesTrimmed}}`;
+    return `{ghand ${cards}&v=${correctVul}&b=${board}&a=${auction}&${namesTrimmed}}`;
 }
 
 /**
@@ -45,7 +45,7 @@ function parseMatch(match) {
  * @returns {string} - A text list of ghand strings, suitable for a BridgeWinners article.
  */
 function parse(source) {
-    const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
+    const regexp = /handviewer\.html\?(.*?)&v=(.)&b=(\d+)&a=(.*?)&(.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
 
     return matches.map(parseMatch).join('\n');
