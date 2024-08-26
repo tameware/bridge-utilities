@@ -40,13 +40,7 @@ function parse(source) {
     const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
 
-    let result = "";
-
-    for (const match of matches) {
-        result += parseMatch(match);
-    }
-
-    return result;
+    return matches.map(parseMatch).join('');
 }
 
 const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
