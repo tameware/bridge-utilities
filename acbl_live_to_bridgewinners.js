@@ -1,5 +1,6 @@
 #! /usr/bin/env node
 
+// Determines the correct vulnerability for a given board number
 function canonicalVul(board) {
     // Defines the vulnerability for boards 1 to 4, per lin format
     const vulPatterns = ["-", "n", "e", "b"];
@@ -13,6 +14,28 @@ function canonicalVul(board) {
     return vulPatterns[patternIndex];
 }
 
+function parseMatch(match) {
+    const [_, cards, vul, board, auction, names] = match;
+    const boardNumber = parseInt(board, 10);
+    
+    let newVul = vul;
+
+    if (vul !== canonicalVul(boardNumber)) {
+        newVul = canonicalVul(boardNumber);
+        console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${newVul}`);
+    }
+
+    const namesTrimmed = names
+        .split("&")
+        .map((name) => {
+            const [direction, playerName] = name.split("=");
+            return `${direction}=${playerName.trim()}`;
+        })
+        .join("&");
+
+    return `{ghand ${cards}v=${newVul}&b=${board}&a=${auction}${namesTrimmed}}\n`;
+}
+
 function parse(source) {
     const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
@@ -20,25 +43,7 @@ function parse(source) {
     let result = "";
 
     for (const match of matches) {
-        const [_, cards, vul, board, auction, names] = match;
-        
-        let newVul = vul;
-
-        if (vul !== canonicalVul(board)) {
-            newVul = canonicalVul(board);
-            console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${newVul}`);
-        }
-
-        const namesTrimmed = names
-            .split("&")
-            .map((name) => {
-                const [direction, playerName] = name.split("=");
-                return `${direction}=${playerName.trim()}`;
-            })
-            .join("&");
-
-        const lin = `${cards}v=${newVul}&b=${board}&a=${auction}${namesTrimmed}`;
-        result += `{ghand ${lin}}\n`;
+        result += parseMatch(match);
     }
 
     return result;
