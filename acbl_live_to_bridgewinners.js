@@ -33,14 +33,14 @@ function parseMatch(match) {
         })
         .join("&");
 
-    return `{ghand ${cards}v=${newVul}&b=${board}&a=${auction}${namesTrimmed}}\n`;
+    return `{ghand ${cards}v=${newVul}&b=${board}&a=${auction}${namesTrimmed}}`;
 }
 
 function parse(source) {
     const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
 
-    return matches.map(parseMatch).join('');
+    return matches.map(parseMatch).join('\n');
 }
 
 const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
