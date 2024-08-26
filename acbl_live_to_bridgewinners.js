@@ -13,12 +13,10 @@ function canonicalVul(board) {
 function parseMatch(match) {
     const [_, cards, vul, board, auction, names] = match;
     const boardNumber = parseInt(board, 10);
-    
-    let newVul = vul;
+    const correctVul = canonicalVul(boardNumber);
 
-    if (vul !== canonicalVul(boardNumber)) {
-        newVul = canonicalVul(boardNumber);
-        console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${newVul}`);
+    if (vul !== correctVul) {
+        console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${correctVul}`);
     }
 
     const namesTrimmed = names
@@ -29,7 +27,7 @@ function parseMatch(match) {
         })
         .join("&");
 
-    return `{ghand ${cards}v=${newVul}&b=${board}&a=${auction}${namesTrimmed}}`;
+    return `{ghand ${cards}v=${correctVul}&b=${board}&a=${auction}${namesTrimmed}}`;
 }
 
 function parse(source) {
