@@ -1,6 +1,10 @@
 #! /usr/bin/env node
 
-// Determines the correct vulnerability for a given board number
+/**
+ * Determines the correct vulnerability for a given board number.
+ * @param {number} board - The board number.
+ * @returns {string} - The vulnerability ('-', 'n', 'e', or 'b').
+ */
 function canonicalVul(board) {
     // Defines the vulnerability for boards 1 to 4, per lin format
     const vulPatterns = ["-", "n", "e", "b"];
@@ -10,6 +14,11 @@ function canonicalVul(board) {
     return vulPatterns[patternIndex];
 }
 
+/**
+ * Parses an individual match and corrects the vulnerability if necessary.
+ * @param {Array} match - The match details from regex capture.
+ * @returns {string} - The formatted LIN string.
+ */
 function parseMatch(match) {
     const [_, cards, vul, board, auction, names] = match;
     const boardNumber = parseInt(board, 10);
@@ -30,6 +39,11 @@ function parseMatch(match) {
     return `{ghand ${cards}v=${correctVul}&b=${board}&a=${auction}${namesTrimmed}}`;
 }
 
+/**
+ * Parses the source text and processes each match.
+ * @param {string} source - The raw HTML or text source to parse.
+ * @returns {string} - A text list of ghand strings, suitable for a BridgeWinners article.
+ */
 function parse(source) {
     const regexp = /handviewer.html.(.*?)v=(.)&b=(\d+)&a=(.*?&)(.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
@@ -39,8 +53,12 @@ function parse(source) {
 
 const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
 
-// Fetch and parse data from a URL.
-// Works only in a Node.js environment due to CORS restrictions.
+/**
+ * Fetches and parses data from a given URL.
+ * Works only in a Node.js environment due to CORS restrictions.
+ * 
+ * @param {string} url - The URL to fetch and parse.
+ */
 async function parseURL(url) {
     try {
         const res = await fetch(url);
