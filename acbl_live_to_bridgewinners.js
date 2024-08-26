@@ -36,7 +36,7 @@ function parseMatch(match) {
         })
         .join("&");
 
-    const lin = [cards, `v=${correctVul}`, `b=${board}`, `a=${auction}`, namesTrimmed].join("&")
+    const lin = [cards, `v=${correctVul}`, `b=${board}`, `a=${auction}`, namesTrimmed].join("&");
 
     return `{ghand ${lin}}`;
 }
@@ -53,8 +53,6 @@ function parse(source) {
     return matches.map(parseMatch).join('\n');
 }
 
-const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
-
 /**
  * Fetches and parses data from a given URL.
  * Works only in a Node.js environment due to CORS restrictions.
@@ -65,7 +63,7 @@ async function parseURL(url) {
     try {
         const res = await fetch(url);
         if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
+            throw new Error(`Failed to fetch URL: ${url}, Status: ${res.status}`);
         }
         const text = await res.text();
         console.log(parse(text));
@@ -79,12 +77,18 @@ const isNode = typeof process !== 'undefined' && process.release && process.rele
 
 // If running from the command line
 if (isNode) {
-    const ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
-    const fs = require('node:fs').promises;
-
-    fs.readFile(ACBL_LIVE_SAMPLE, 'utf8')
-        .then(data => console.log(parse(data)))
-        .catch(err => console.error(`Error reading file ${ACBL_LIVE_SAMPLE}:`, err));
+    if (true) {
+        const ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
+        const fs = require('node:fs').promises;
+    
+        fs.readFile(ACBL_LIVE_SAMPLE, 'utf8')
+            .then(data => console.log(parse(data)))
+            .catch(err => console.error(`Error reading file ${ACBL_LIVE_SAMPLE}:`, err));
+    } else {
+        // Using a file instead to avoid extra load on live.acbl.org
+        const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
+        parseURL(ACBL_LIVE_URL);
+    }
 }
 
 
