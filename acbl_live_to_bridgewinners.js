@@ -20,7 +20,7 @@ function canonicalVul(board) {
  * @returns {string} - The formatted LIN string.
  */
 function parseMatch(match) {
-    const [_, cards, vul, board, auction, names] = match;
+    const { cards, vul, board, auction, names } = match.groups;
     const boardNumber = parseInt(board, 10);
     const correctVul = canonicalVul(boardNumber);
 
@@ -47,7 +47,7 @@ function parseMatch(match) {
  * @returns {string} - A text list of ghand strings, suitable for a BridgeWinners article.
  */
 function parse(source) {
-    const regexp = /handviewer\.html\?(.*?)&v=(.)&b=(\d+)&a=(.*?)&(.*?)&tbt=y/gi;
+    const regexp = /handviewer\.html\?(?<cards>.*?)&v=(?<vul>.)&b=(?<board>\d+)&a=(?<auction>.*?)&(?<names>.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
 
     return matches.map(parseMatch).join('\n');
