@@ -44,6 +44,9 @@ const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
 async function parseURL(url) {
     try {
         const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`HTTP error! Status: ${res.status}`);
+        }
         const text = await res.text();
         console.log(parse(text));
     } catch (err) {
