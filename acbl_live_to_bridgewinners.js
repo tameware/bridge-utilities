@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
+export { canonicalVul, parseMatch, parse };
+
 /**
  * Determines the correct vulnerability for a given board number.
  * @param {number} board - The board number.
@@ -20,7 +22,7 @@ function canonicalVul(board) {
  * @returns {string} - The formatted LIN string.
  */
 function parseMatch(match) {
-    const { cards, vul, board, auction, names } = match.groups;
+    const { cards, dealer, vul, board, auction, names } = match.groups;
     const boardNumber = parseInt(board, 10);
     const correctVul = canonicalVul(boardNumber);
 
@@ -36,7 +38,7 @@ function parseMatch(match) {
         })
         .join("&");
 
-    const lin = [cards, `v=${correctVul}`, `b=${board}`, `a=${auction}`, namesTrimmed].join("&");
+    const lin = [cards, `d=${dealer}`, `v=${correctVul}`, `b=${board}`, `a=${auction}`, namesTrimmed].join("&");
 
     return `{ghand ${lin}}`;
 }
@@ -47,7 +49,7 @@ function parseMatch(match) {
  * @returns {string} - A text list of ghand strings, suitable for a BridgeWinners article.
  */
 function parse(source) {
-    const regexp = /handviewer\.html\?(?<cards>.*?)&v=(?<vul>.)&b=(?<board>\d+)&a=(?<auction>.*?)&(?<names>.*?)&tbt=y/gi;
+    const regexp = /handviewer\.html\?(?<cards>.*?)&d=(?<dealer>.)&v=(?<vul>.)&b=(?<board>\d+)&a=(?<auction>.*?)&(?<names>.*?)&tbt=y/gi;
     const matches = [...source.matchAll(regexp)];
 
     return matches.map(parseMatch).join('\n');
@@ -75,17 +77,14 @@ async function parseURL(url) {
 // Check whether the code is running in a Node.js environment
 const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
 
+import { ACBL_LIVE_SAMPLE_HTML } from './ACBL Live sample.html.js';
+
 // If running from the command line
 if (isNode) {
     if (true) {
-        const ACBL_LIVE_SAMPLE = './ACBL Live sample.html';
-        const fs = require('node:fs').promises;
-    
-        fs.readFile(ACBL_LIVE_SAMPLE, 'utf8')
-            .then(data => console.log(parse(data)))
-            .catch(err => console.error(`Error reading file ${ACBL_LIVE_SAMPLE}:`, err));
+        // Using a string to avoid extra load on live.acbl.org
+        console.log(parse(ACBL_LIVE_SAMPLE_HTML));
     } else {
-        // Using a file instead to avoid extra load on live.acbl.org
         const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
         parseURL(ACBL_LIVE_URL);
     }
