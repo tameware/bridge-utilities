@@ -77,7 +77,7 @@ async function parseURL(url) {
 // Check whether the code is running in a Node.js environment
 const isNode = typeof process !== 'undefined' && process.release && process.release.name === 'node';
 
-import { ACBL_LIVE_SAMPLE_HTML } from './ACBL Live sample.html.js';
+import { ACBL_LIVE_SAMPLE_HTML } from './acbl_live_sample.html.js';
 
 // If running from the command line
 if (isNode) {
