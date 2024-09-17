@@ -1,5 +1,10 @@
 export const SINGLE_LINE_TEST_INPUT = `
-    handviewer.html?n=cj532dk10sk103hk542&s=caq1094d-----sq962haqj8&e=c876dq87saj754h97&w=ckdaj965432s8h1063&d=n&v=-&b=1&a=pp6hppp&nn= Brian Platnick &sn= Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard&tbt=y`;
+    handviewer.html?n=cj532dk10sk103hk542&s=caq1094d-----sq962haqj8&e=c876dq87saj754h97&w=ckdaj965432s8h1063&d=n&v=-&b=1&a=pp6hppp&nn= Brian Platnick &sn= Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard&tbt=y
+`;
+
+export const SINGLE_LINE_TEST_OUTPUT = `
+    {ghand n=cj532dk10sk103hk542&s=caq1094d-----sq962haqj8&e=c876dq87saj754h97&w=ckdaj965432s8h1063&d=n&v=-&b=1&a=pp6hppp&nn=Brian Platnick&sn=Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard}
+`.trim();
 
 export const MULTI_LINE_TEST_INPUT = `
     handviewer.html?n=cj532dk10sk103hk542&s=caq1094d-----sq962haqj8&e=c876dq87saj754h97&w=ckdaj965432s8h1063&d=n&v=-&b=1&a=pp6hppp&nn= Brian Platnick &sn= Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard&tbt=y&p={&lt;p&gt;&lt;a href=&quot;https://live.acbl.org&quot;&gt;ACBL Live&lt;/a&gt;&lt;/p&gt;
