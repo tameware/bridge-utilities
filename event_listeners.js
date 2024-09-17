@@ -1,3 +1,5 @@
+import { parse } from './acbl_live_to_bridgewinners.js';
+
 // Handle the form submission
 document.getElementById('textForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting in the traditional way
