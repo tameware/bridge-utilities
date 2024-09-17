@@ -3,7 +3,7 @@
 
 import { expect } from 'chai';
 import { canonicalVul, parseMatch, parse } from './acbl_live_to_bridgewinners.js';
-import { SINGLE_LINE_TEST_INPUT, SINGLE_LINE_TEST_OUTPUT, MULTI_LINE_TEST_INPUT } from './test_strings.js';
+import { SINGLE_LINE_TEST_INPUT, SINGLE_LINE_TEST_OUTPUT, MULTI_LINE_TEST_INPUT, MULTI_LINE_TEST_OUPUT } from './test_strings.js';
 
 describe('canonicalVul', () => {
   it('should return the correct vulnerability for each board number', () => {
@@ -68,13 +68,7 @@ describe('parse', () => {
   });
 
   it('should handle multiple matches and return formatted ghand strings', () => {
-
     const result = parse(MULTI_LINE_TEST_INPUT);
-    const GHAND_STRING = `
-{ghand n=cj532dk10sk103hk542&s=caq1094d-----sq962haqj8&e=c876dq87saj754h97&w=ckdaj965432s8h1063&d=n&v=-&b=1&a=pp6hppp&nn=Brian Platnick&sn=Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard}
-{ghand n=caq75daj7skq95h83&s=ck104d964s732haj54&e=cj86dq532sj1086hk10&w=c932dk108sa4hq9762&d=e&v=n&b=2&a=ppp1nppp&nn=Brian Platnick&sn=Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard}
-`.trim()
-
-    expect(result).to.equal(GHAND_STRING);
+    expect(result).to.equal(MULTI_LINE_TEST_OUPUT);
   });
 });
