@@ -10,4 +10,8 @@ You can use the script directly here:
 
 https://tameware.com/adam/bridge/utilities/
 
+To run the tests:
+
+    npx mocha test.js
+
 > Written with [StackEdit](https://stackedit.io/).
