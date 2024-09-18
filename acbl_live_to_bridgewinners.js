@@ -1,6 +1,11 @@
 #! /usr/bin/env node
 
-export { canonicalVul, parseMatch, parse };
+export { canonicalVul, logMessage, parseMatch, parse };
+
+// Factored out so that it can be mocked for tests
+function logMessage(message) {
+    console.log(message);
+}
 
 /**
  * Determines the correct vulnerability for a given board number.
@@ -27,7 +32,7 @@ function parseMatch(match) {
     const correctVul = canonicalVul(boardNumber);
 
     if (vul !== correctVul) {
-        console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${correctVul}`);
+        logMessage(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${correctVul}`);
     }
 
     const namesTrimmed = names
@@ -68,7 +73,7 @@ async function parseURL(url) {
             throw new Error(`Failed to fetch URL: ${url}, Status: ${res.status}`);
         }
         const text = await res.text();
-        console.log(parse(text));
+        logMessage(parse(text));
     } catch (err) {
         console.error('Error fetching or parsing URL:', err);
     }
@@ -83,7 +88,7 @@ import { ACBL_LIVE_SAMPLE_HTML } from './acbl_live_sample.html.js';
 if (isNode) {
     if (true) {
         // Using a string to avoid extra load on live.acbl.org
-        console.log(parse(ACBL_LIVE_SAMPLE_HTML));
+        logMessage(parse(ACBL_LIVE_SAMPLE_HTML));
     } else {
         const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
         parseURL(ACBL_LIVE_URL);
