@@ -27,7 +27,7 @@ function parseMatch(match) {
     const correctVul = canonicalVul(boardNumber);
 
     if (vul !== correctVul) {
-        console.log(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${correctVul}`);
+        console.warn(`Corrected vulnerability on board ${board}. Was ${vul}, should be ${correctVul}`);
     }
 
     const namesTrimmed = names
