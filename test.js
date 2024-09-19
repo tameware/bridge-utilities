@@ -64,7 +64,7 @@ describe('parseMatch', () => {
     };
 
     const message = 'Corrected vulnerability on board 2. Was -, should be n';
-    mock.expects('log')
+    mock.expects('warn')
       .once()
       .withExactArgs(message);
 
@@ -74,6 +74,8 @@ describe('parseMatch', () => {
 `.trim()
 
     expect(result).to.equal(GHAND_STRING);
+
+    mock.verify();
   });
 });
 
@@ -95,11 +97,13 @@ describe('parse', () => {
 
   it('should handle multiple matches and return formatted ghand strings', () => {
     const message = 'Corrected vulnerability on board 2. Was -, should be n';
-    mock.expects('log')
+    mock.expects('warn')
       .once()
       .withExactArgs(message);
 
     const result = parse(MULTI_LINE_TEST_INPUT);
     expect(result).to.equal(MULTI_LINE_TEST_OUPUT);
+
+    mock.verify();
   });
 });
