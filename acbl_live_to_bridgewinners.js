@@ -81,10 +81,10 @@ import { ACBL_LIVE_SAMPLE_HTML } from './acbl_live_sample.html.js';
 
 // If running from the command line
 if (isNode) {
-    if (true) {
+    if (false) {
         // Using a string to avoid extra load on live.acbl.org
         console.log(parse(ACBL_LIVE_SAMPLE_HTML));
-    } else {
+    } else if (false) {
         const ACBL_LIVE_URL = 'https://live.acbl.org/event/NABC242/VZLM/6/scores/W/E/7';
         parseURL(ACBL_LIVE_URL);
     }
