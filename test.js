@@ -5,6 +5,8 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import { canonicalVul, parseMatch, parse } from './acbl_live_to_bridgewinners.js';
 import { SINGLE_LINE_TEST_INPUT, SINGLE_LINE_TEST_OUTPUT, MULTI_LINE_TEST_INPUT, MULTI_LINE_TEST_OUPUT } from './test_strings.js';
+import { ACBL_LIVE_SAMPLE_HTML } from './acbl_live_sample.html.js';
+import { EXPECTED_SAMPLE_PAGE_RESULT } from './expected_sample_page_result.js';
 
 describe('canonicalVul', () => {
   it('should return the correct vulnerability for each board number', () => {
@@ -106,4 +108,13 @@ describe('parse', () => {
 
     mock.verify();
   });
+
+  it('should parse an entire page', () => {
+    mock.expects('warn')
+      .exactly(6);
+    const result = parse(ACBL_LIVE_SAMPLE_HTML);
+    expect(result).to.equal(EXPECTED_SAMPLE_PAGE_RESULT);
+    mock.verify();
+  });
+
 });
