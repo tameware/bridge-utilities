@@ -26,3 +26,11 @@ export const MULTI_LINE_TEST_OUPUT = `
 {ghand n=caq75daj7skq95h83&s=ck104d964s732haj54&e=cj86dq532sj1086hk10&w=c932dk108sa4hq9762&d=e&v=n&b=2&a=ppp1nppp&nn=Brian Platnick&sn=Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard}
 `.trim();
 
+export const MULTI_LINE_TEST_OUPUT_1 = `
+{ghand n=cj532dk10sk103hk542&s=caq1094d-----sq962haqj8&e=c876dq87saj754h97&w=ckdaj965432s8h1063&d=n&v=-&b=1&a=pp6hppp&nn=Brian Platnick&sn=Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard}
+`.trim();
+
+export const MULTI_LINE_TEST_OUPUT_2 = `
+{ghand n=caq75daj7skq95h83&s=ck104d964s732haj54&e=cj86dq532sj1086hk10&w=c932dk108sa4hq9762&d=e&v=n&b=2&a=ppp1nppp&nn=Brian Platnick&sn=Danny Sprung&en=Adam Wildavsky&wn=Ron Gerard}
+`.trim();
+
