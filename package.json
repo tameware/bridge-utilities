@@ -12,6 +12,9 @@
     "scripts": {
         "cypress:open": "cypress open",
         "cypress:run": "cypress run --spec cypress/e2e/convert.cy.js",
-        "mocha:run": "npx mocha test.js"
+        "test": "npx mocha test.js",
+        "unit_tests": "npm run test",
+        "e2e_tests": "npm run cypress:run",
+        "all_tests": "npm run unit_tests && npm run e2e_tests"
     }
 }
