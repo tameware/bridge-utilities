@@ -10,11 +10,12 @@ You can use the script directly here:
 
 https://tameware.com/adam/bridge/utilities/
 
-To run the tests:
+To run the tests, you must first run `npm install` to create the node_modules directory. Then pick a target from package.json:
 
     npx run unit_tests
     npx run local_e2e_tests
     npm run all_tests      # Both of the above
     npm run cypress:server # Run against the version deployed to tameware.com
+    npm run cypress:open # Open the Cypress test console
 
 > Written with [StackEdit](https://stackedit.io/).
