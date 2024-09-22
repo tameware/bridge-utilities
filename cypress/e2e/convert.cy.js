@@ -39,12 +39,12 @@ describe('Utility test', () => {
 
   it('Confirms that input with two matches produces two correct results', () => {
     cy.get('#userInput').type(MULTI_LINE_TEST_INPUT);
-    cy.get('#userInput').should('include.value', stripNewlines(MULTI_LINE_TEST_INPUT.trim()));
+    cy.get('#userInput').should('include.value', stripNewlines(MULTI_LINE_TEST_INPUT));
     
     cy.get('#textForm').submit()
     
     cy.get('#result').invoke('text').then((editorText) => {
-      expect(editorText).to.contain(stripNewlines(MULTI_LINE_TEST_OUPUT.trim()));
+      expect(editorText).to.contain(stripNewlines(MULTI_LINE_TEST_OUPUT));
     });
   });
 });
