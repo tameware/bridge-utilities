@@ -16,7 +16,7 @@
         "test":             "npx mocha test.js",
         "unit_tests":       "npm run test",
         "local_e2e_tests":  "npm run cypress:run",
-        "server_e2e_tests": "npm run cypress:run",
+        "server_e2e_tests": "npm run cypress:server",
         "all_tests":        "npm run unit_tests && npm run local_e2e_tests"
     }
 }
