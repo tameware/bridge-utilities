@@ -20,8 +20,6 @@ describe('Utility test', () => {
     cy.get('#textForm').submit()
     
     cy.get('#result').should('have.value', '');
-
-    cy.get('#userInput').clear();
   });
 
   it('Confirms that input with one match produces a correct result', () => {
@@ -35,8 +33,6 @@ describe('Utility test', () => {
     cy.get('#result').invoke('text').then((editorText) => {
       expect(editorText).to.equal(SINGLE_LINE_TEST_OUTPUT);
     });
-
-    cy.get('#userInput').clear();
   });
 
   it('Confirms that input with two matches produces two correct results', () => {
