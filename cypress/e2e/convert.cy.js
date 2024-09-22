@@ -6,7 +6,8 @@ function stripNewlines(str) {
 
 describe('Utility test', () => {
   beforeEach(() => {
-    cy.visit('.');
+    const server = Cypress.env('SERVER');
+    cy.visit(server);
   });
 
   it('Visits the app and checks the title', () => {
