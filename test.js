@@ -1,6 +1,3 @@
-// const { expect } = require('chai');
-// const { canonicalVul, parseMatch, parse } = require('./acbl_live_to_bridgewinners.js');
-
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { canonicalVul, parseMatch, parse } from './acbl_live_to_bridgewinners.js';
